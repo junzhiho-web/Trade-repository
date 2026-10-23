@@ -1,0 +1,22 @@
+name: atas_indicator_build
+title: ATAS Custom Indicator Build
+description: Build, compile, install, and verify a C# custom indicator in ATAS 8 with Visual Studio while avoiding common project, reference, install-folder, and code-handoff mistakes.
+category: Creation
+include_in_prompt: false
+skill_improvement:
+  managed: true
+  status: active
+  evidence_handles:
+  - message:d95f8683-3483-4cb2-8ba3-5247c5286590
+  - message:assistant-msg-db5625c9-8c80-4d18-91cd-e114b73a7936
+  - message:4b245179-f28a-41d5-a2ad-20c70d3eff82
+  - message:7339c50b-6aef-4feb-ae01-c8f00ee2c689
+  measurement:
+    proxy_metric_id: atas_build_pitfall_repeat_count
+    success_criterion: Zero repeats of the eight known ATAS build and code-handoff pitfalls (including CS1002 from a semicolon inside a trailing comment, a fullwidth semicolon typed under a Chinese IME, and a misjudged stale Visual Studio error list) in the first skill-guided ATAS indicator build or update session within the window; inconclusive if no ATAS indicator build occurs in the window.
+    window_days: 60
+  needs_review: false
+  rationale: On 2026-10-22 the 1.1.1 update shipped with statement semicolons placed inside trailing comments (... // 注释;), producing CS1002, and 1.1.2 inherited the break; the assistant owned the typo in message:assistant-msg-db5625c9-8c80-4d18-91cd-e114b73a7936. The user then hand-edited the fix and typed a fullwidth semicolon '；' under a Chinese IME, so CS1002 persisted ('还是出错呀', message:4b245179-f28a-41d5-a2ad-20c70d3eff82) until whole lines were pasted verbatim ('成功了', message:7339c50b-6aef-4feb-ae01-c8f00ee2c689). The current SKILL.md (read at rev 4ba5c42e72441948f3c0e0e624a28311f52f6ca3dac4573d0119b30f7abbd896) covers project setup, references, and install-folder choice but says nothing about how corrected code is handed off or about stale Visual Studio error lists, so this friction class will recur on every future indicator update. The user's batching discipline (1.0.x versions, confirmed change lists, one delivery per version) makes whole-file replacement the natural fix. This is a new, specific failure class, not covered by any existing skill section.
+  review_after: 2026-12-22T00:40:48.235477+00:00
+  reviewed_at: 2026-10-23T00:40:48.235477+00:00
+  run_id: sirun_9dfbc5e9b4ef49f8859e6d305479b71b
